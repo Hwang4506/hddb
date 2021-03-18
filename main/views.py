@@ -6,6 +6,9 @@ from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
 from django.db.models import Q, Count
+from django.http import HttpResponse
+from main.resources import InfoResource
+import csv
 
 @login_required(login_url='common:login')
 @permission_required('main.view_info', login_url='common:login', raise_exception=False)
@@ -44,7 +47,7 @@ def index(request):
 @permission_required('main.view_info', login_url='common:login', raise_exception=False)
 def detail(request, info_id):
     """
-    내용 출력
+    상담 내용 출력
     """
     info = get_object_or_404(Info, pk=info_id)
     context = {'info': info}
@@ -124,3 +127,19 @@ def answer_delete(request, answer_id):
     else:
         answer.delete()
     return redirect('main:detail', info_id=answer.info.id)
+
+def export(request):
+    info_resource = InfoResource()
+    dataset = info_resource.export()
+    # r2 = Info.objects.all()
+    # info_resource = r2[0].answer_set.all()
+    response = HttpResponse(dataset.xls, content_type='text/xls')
+    response['Content-Disposition'] = 'attachment; filename="info.xls"'
+    # writer = csv.writer(response)
+    # writer.writerow(['Name', 'Ph', 'Message', 'Create_date', 'Agree'])
+    #
+    # r2 = Info.objects.all()
+    # # r1 = r2[0].answer_set.all()
+    # for ld in r2:
+    #     writer.writerow(r2)
+    return response

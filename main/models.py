@@ -17,3 +17,15 @@ class Answer(models.Model):
     memo = models.TextField()
     create_date = models.DateTimeField()
     modify_date = models.DateTimeField(null=True, blank=True)
+
+# class Multi(Info):
+#     pass
+
+
+# class Join(models.Model):
+#     Customer_name = models.ForeignKey(
+#         Answer, on_delete=models.CASCADE,
+#         to_field='memo',
+#         db_column="customer_name",
+#         unique=True
+#     )

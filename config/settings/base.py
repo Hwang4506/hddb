@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'import_export',
     'common.apps.CommonConfig',
     'main.apps.MainConfig',
     'django.contrib.admin',
@@ -126,3 +127,5 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/common/login/'
 
 ALLOWED_HOSTS = ['3.35.84.231']
+
+IMPORT_EXPORT_USE_TRANSACTIONS = True
