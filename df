@@ -1,0 +1,29 @@
+[33mcommit d61a2af5cfe83b59c406ec9b97ffe733f4f5a1ae[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: 황용근 <dydrms4506@naver.com>
+Date:   Thu Mar 18 10:44:15 2021 +0900
+
+    엑셀추출, 모바일 최적화
+
+[33mcommit 3155f884b6ac317c772fc83509a32f772116c57d[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: 황용근 <dydrms4506@naver.com>
+Date:   Fri Mar 12 14:53:13 2021 +0900
+
+    settings 변경
+
+[33mcommit c4ffcd3388645f655a9ff90282e76a59622e5528[m
+Author: 황용근 <dydrms4506@naver.com>
+Date:   Fri Mar 12 13:59:40 2021 +0900
+
+    ALLOWD_HOSTS 변경
+
+[33mcommit 7fb4463f5136f6fbdad734901ece0b11025e6585[m
+Author: 황용근 <dydrms4506@naver.com>
+Date:   Fri Mar 12 11:30:23 2021 +0900
+
+    전화번호 변경
+
+[33mcommit 0282ece5a1aa82d68419fa21deaf5e7d0afe416c[m
+Author: 황용근 <dydrms4506@naver.com>
+Date:   Thu Mar 11 18:15:37 2021 +0900
+
+    db 커밋
