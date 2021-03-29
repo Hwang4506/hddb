@@ -3,7 +3,7 @@
     <div class="mx-auto" style="width:200px; display:flex; justify-content:center;">
         <img src="https://res.cloudinary.com/dgb2e2npb/image/upload/v1615252567/hi1_ekqums.png">
     </div>
-    <form method="post" class="post-form my-3">
+    <form method="post" class="post-form my-3" id="info-form">
         {% csrf_token %}
         <!-- 오류표시 Start -->
         {% if form.errors %}

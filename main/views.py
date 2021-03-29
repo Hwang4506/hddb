@@ -6,8 +6,9 @@ from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
 from django.db.models import Q, Count
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from main.resources import InfoResource
+from django.core import serializers
 import csv
 
 @login_required(login_url='common:login')
@@ -42,6 +43,7 @@ def index(request):
     page_obj = paginator.get_page(page)
     context = {'info_list': page_obj, 'page': page, 'kw': kw, 'so': so}  # page, kw, so가 추가되었다.
     return render(request, 'main/info_list.html', context)
+
 
 @login_required(login_url='common:login')
 @permission_required('main.view_info', login_url='common:login', raise_exception=False)
