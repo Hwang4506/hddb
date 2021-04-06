@@ -15,3 +15,13 @@ class InfoResource(resources.ModelResource):
         # export_order = ('id', 'name', 'ph', 'message', 'create_date', 'memo')
         # fields = ('info', 'name', 'author', 'memo', 'create_date')
         # export_order = ('info', 'name', 'memo', 'author', 'create_date')
+
+class AnswerResource(resources.ModelResource):
+
+
+    class Meta:
+        model = Answer
+
+        fields = ('info', 'info__name', 'info__ph', 'info__message', 'info__create_date', 'author__username', 'memo',
+                  'create_date',)
+        export_order = fields

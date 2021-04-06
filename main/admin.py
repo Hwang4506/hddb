@@ -4,7 +4,7 @@ from import_export.admin import ExportActionModelAdmin, ImportExportMixin, Impor
 
 class InfoAdmin(ImportExportMixin, admin.ModelAdmin):
     search_fields = ['name']
-
+    list_display = ['pk', 'name', 'create_date']
 
 admin.site.register(Info, InfoAdmin)
 admin.site.register(Answer)

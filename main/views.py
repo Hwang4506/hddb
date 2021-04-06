@@ -7,9 +7,11 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
 from django.db.models import Q, Count
 from django.http import HttpResponse, JsonResponse
-from main.resources import InfoResource
+from main.resources import InfoResource, AnswerResource
 from django.core import serializers
 import csv
+from django.utils.encoding import smart_str
+import datetime as dt
 
 @login_required(login_url='common:login')
 @permission_required('main.view_info', login_url='common:login', raise_exception=False)
@@ -131,12 +133,15 @@ def answer_delete(request, answer_id):
     return redirect('main:detail', info_id=answer.info.id)
 
 def export(request):
-    info_resource = InfoResource()
-    dataset = info_resource.export()
-    # r2 = Info.objects.all()
-    # info_resource = r2[0].answer_set.all()
-    response = HttpResponse(dataset.xls, content_type='text/xls')
-    response['Content-Disposition'] = 'attachment; filename="info.xls"'
+    # info_resource = InfoResource()
+    # info_dataset = info_resource.export()
+    answer_resource = AnswerResource()
+    answer_dataset = answer_resource.export()
+    # # r2 = Info.objects.all()
+    # # info_resource = r2[0].answer_set.all()
+    # response = HttpResponse(answer_dataset.xls, content_type='text/xls')
+    # response['Content-Disposition'] = 'attachment; filename="info.xls"'
+
     # writer = csv.writer(response)
     # writer.writerow(['Name', 'Ph', 'Message', 'Create_date', 'Agree'])
     #
@@ -144,4 +149,62 @@ def export(request):
     # # r1 = r2[0].answer_set.all()
     # for ld in r2:
     #     writer.writerow(r2)
-    return response
+    # for info in Info.objects.all()[:10]:
+    #     if info.answer_set.all().count() > 0:
+    #         for answer in info.answer_set.all():
+    #             print(info, answer)
+    #     else:
+    #         print(info)
+    # print(answer_dataset.xls)
+    # response = HttpResponse(answer_dataset.xls, content_type='text/xls')
+    # response['Content-Disposition'] = 'attachment; filename="info.xls"'
+
+    return download_csv_data(request)
+
+def download_csv_data(request):
+   # response content type
+   response = HttpResponse(content_type='text/csv')
+   #decide the file name
+   response['Content-Disposition'] = 'attachment; filename="ThePythonDjango.csv"'
+   writer = csv.writer(response, csv.excel)
+   response.write(u'\ufeff'.encode('utf8'))
+   #write the headers
+   writer.writerow([
+       smart_str(u"고객 ID"),
+       smart_str(u"고객 이름"),
+       smart_str(u"고객 전화번호"),
+       smart_str(u"고객 메세지"),
+       smart_str(u"상담 생성날짜"),
+
+       smart_str(u"답변자"),
+       smart_str(u"답변내용"),
+       smart_str(u"답변 생성날짜"),
+   ])
+   #get data from database or from text file....
+   for info in Info.objects.all():
+       if info.answer_set.all().count() > 0:
+           for answer in info.answer_set.all():
+               writer.writerow([
+                   smart_str(info.id),
+                   smart_str(info.name),
+                   smart_str(info.ph[0:3] + "-" + info.ph[3:7] + "-" + info.ph[7:]),
+                   smart_str(info.message),
+                   smart_str(timezone.localtime(info.create_date).strftime('%Y-%m-%d %H:%M:%S')),
+
+                   smart_str(answer.author),
+                   smart_str(answer.memo),
+                   smart_str(timezone.localtime(answer.create_date).strftime('%Y-%m-%d %H:%M:%S')),
+               ])
+       else:
+           writer.writerow([
+               smart_str(info.id),
+               smart_str(info.name),
+               smart_str(info.ph[0:3] + "-" + info.ph[3:7] + "-" + info.ph[7:]),
+               smart_str(info.message),
+               smart_str(timezone.localtime(info.create_date).strftime('%Y-%m-%d %H:%M:%S')),
+
+               smart_str(""),
+               smart_str(""),
+               smart_str(""),
+           ])
+   return response
