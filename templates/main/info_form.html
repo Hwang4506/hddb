@@ -1,8 +1,22 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
-<div class="container">
-    <div class="text-center">
-        <img src="https://res.cloudinary.com/dgb2e2npb/image/upload/v1615252567/hi1_ekqums.png" class="rounded mx-auto d-block">
-    </div>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+</style>
+<div class="container" style="padding-left:0px;">
+       <div class="text-center">
+        <img src="https://res.cloudinary.com/dgb2e2npb/image/upload/v1615252567/hi1_ekqums.png">
+       </div>
     <form method="post" class="post-form my-3" id="info-form">
         {% csrf_token %}
         <!-- 오류표시 Start -->
@@ -21,23 +35,25 @@
         <div class="form-group" style="position:relative; margin-left:25%;">
             <label for="name" >이름</label>
             <input type="text" class="form-control" name="name" id="name"
-                   value="{{ form.name.value|default_if_none:'' }}" style="width:250px">
+                   value="{{ form.name.value|default_if_none:'' }}" style="width:300px">
         </div>
         <div class="form-group" style="position:relative; margin-left:25%;">
             <label for="ph">전화번호</label>
             <input type="number" class="form-control" name="ph" id="ph"
-                   value="{{ form.ph.value|default_if_none:'' }}" style="width:250px">
+                   value="{{ form.ph.value|default_if_none:'' }}" style="width:300px">
         </div>
         <div class="form-group" style="position:relative; margin-left:25%;">
             <label for="message">메세지</label>
             <textarea class="form-control" name="message"
-                      id="message" rows="10" style="width:350px">{{ form.message.value|default_if_none:'' }}</textarea>
+                      id="message" rows="10" style="width:400px">{{ form.message.value|default_if_none:'' }}</textarea>
         </div>
         <div class="form-group" style="position:relative; margin-left:25%;">
             <input type="checkbox" name="agree" id="agree" value="yes"><label for="agree" style="margin : auto auto auto 10px;">개인정보취급동의(필수)</label>&nbsp&nbsp&nbsp<a href="#agreescroll" onclick="window.open('https://www.replyalba.co.kr/intros/hiHyundai/term.html','이용약관','width=500 height=500')"><U>이용약관 보기</a>
         </div>
+        <div class="container-fluid text-center" >
         <button type="submit" class="btn btn-primary" style="display: block; margin: 0 auto;
-        background-color:#0e0f0f; border-color:#0e0f0f; width: 530px; font-size:large; font-weight: 900; text-align:center;">제&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp출</button>
+        background-color:#0e0f0f; border-color:#0e0f0f; width: 580px; font-size:large; font-weight: 900; text-align:center;">제&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp출</button>
+        </div>
         {% if messages %}
             {% for message in messages %}
                 <div class="alert alert-{{ message.tags }} m-2" id="msg" role="alert">
@@ -46,9 +62,10 @@
             {% endfor %}
         {% endif %}
     </form>
-    <img src="https://res.cloudinary.com/dgb2e2npb/image/upload/v1615252633/hi2_nffigp.png" style="display: block; margin: 0 auto;">
-    <img src="https://res.cloudinary.com/dgb2e2npb/image/upload/v1615252635/hi3_uigdyx.png" style="display: block; margin: 0 auto;">
-    <img src="https://res.cloudinary.com/dgb2e2npb/image/upload/v1615252634/hi4_wno4pn.png" style="display: block; margin: 0 auto;">
-    <img src="https://res.cloudinary.com/dgb2e2npb/image/upload/v1615252632/hi5_kfpetl.png" style="display: block; margin: 0 auto;">
 </div>
-
+<div class="container-fluid text-center" >
+    <img src="https://res.cloudinary.com/dgb2e2npb/image/upload/v1615252633/hi2_nffigp.png" style="width : 580px;" >
+    <img src="https://res.cloudinary.com/dgb2e2npb/image/upload/v1615252635/hi3_uigdyx.png" style="display: block; margin: 0 auto; width : 580px;">
+    <img src="https://res.cloudinary.com/dgb2e2npb/image/upload/v1615252634/hi4_wno4pn.png" style="display: block; margin: 0 auto; width : 580px;">
+    <img src="https://res.cloudinary.com/dgb2e2npb/image/upload/v1615252632/hi5_kfpetl.png" style="display: block; margin: 0 auto; width : 580px;">
+</div>

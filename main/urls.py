@@ -12,4 +12,5 @@ urlpatterns = [
     path('answer/modify/<int:answer_id>/', views.answer_modify, name='answer_modify'),
     path('answer/delete/<int:answer_id>/', views.answer_delete, name='answer_delete'),
     path('export', views.export, name='info_export'),
+    path('deny', views.deny, name='deny'),
     ]

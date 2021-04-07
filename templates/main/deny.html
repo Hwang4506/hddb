@@ -1,0 +1,27 @@
+{% extends "base2.html" %}
+{% block content %}
+<!-- Modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">권한 오류</h5>
+      </div>
+      <div class="modal-body">
+        사용 권한이 없습니다.
+      </div>
+      <div class="modal-footer">
+          <a href="{% url 'common:login' %}" class="btn btn-primary">돌아가기</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script type='text/javascript'>
+    $('#exampleModal').modal('show')
+</script>
+{% endblock %}

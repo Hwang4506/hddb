@@ -15,7 +15,13 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('index')
+            return redirect('common:signupsuccess')
     else:
         form = UserForm()
     return render(request, 'common/signup.html', {'form': form})
+
+def signupsuccess(request):
+    """
+        계정생성 성공
+                   """
+    return render(request, 'common/signupsuccess.html')

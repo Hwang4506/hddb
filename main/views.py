@@ -14,7 +14,7 @@ from django.utils.encoding import smart_str
 import datetime as dt
 
 @login_required(login_url='common:login')
-@permission_required('main.view_info', login_url='common:login', raise_exception=False)
+@permission_required('main.view_info', login_url='main:deny', raise_exception=False)
 def index(request):
     """
     목록 출력
@@ -48,7 +48,7 @@ def index(request):
 
 
 @login_required(login_url='common:login')
-@permission_required('main.view_info', login_url='common:login', raise_exception=False)
+@permission_required('main.view_info', login_url='main:deny', raise_exception=False)
 def detail(request, info_id):
     """
     상담 내용 출력
@@ -58,7 +58,7 @@ def detail(request, info_id):
     return render(request, 'main/info_detail.html', context)
 
 @login_required(login_url='common:login')
-@permission_required('main.view_info', login_url='common:login', raise_exception=False)
+@permission_required('main.view_info', login_url='main:deny', raise_exception=False)
 def answer_create(request, info_id):
     """
     메모등록
@@ -96,7 +96,7 @@ def info_create(request):
     return render(request, 'main/info_form.html', context)
 
 @login_required(login_url='common:login')
-@permission_required('main.view_info', login_url='common:login', raise_exception=False)
+@permission_required('main.view_info', login_url='main:deny', raise_exception=False)
 def answer_modify(request, answer_id):
     """
     메모수정
@@ -120,7 +120,7 @@ def answer_modify(request, answer_id):
     return render(request, 'main/answer_form.html', context)
 
 @login_required(login_url='common:login')
-@permission_required('main.view_info', login_url='common:login', raise_exception=False)
+@permission_required('main.view_info', login_url='main:deny', raise_exception=False)
 def answer_delete(request, answer_id):
     """
     메모삭제
@@ -208,3 +208,9 @@ def download_csv_data(request):
                smart_str(""),
            ])
    return response
+
+def deny(request):
+    """
+        권한없음
+                   """
+    return render(request, 'main/deny.html')
